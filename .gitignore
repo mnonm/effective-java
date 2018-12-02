@@ -1,0 +1,27 @@
+# generated
+/build
+/out
+/.gradle
+
+# personal setting
+.idea
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+/out
+/bin
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
