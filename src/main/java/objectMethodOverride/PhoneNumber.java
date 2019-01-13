@@ -1,7 +1,9 @@
 package objectMethodOverride;
 
 
-public final class PhoneNumber {
+import java.util.Comparator;
+
+public final class PhoneNumber implements Comparable<PhoneNumber> {
     private final short areaCode, prefix, lineNum;
 
     public PhoneNumber(int areaCode, int prefix, int lineNum) {
@@ -11,7 +13,7 @@ public final class PhoneNumber {
     }
 
     private static short rangeCheck(int val, int max, String arg) {
-        if(val < 0 || val > max) {
+        if (val < 0 || val > max) {
             throw new IllegalArgumentException(arg + ": " + val);
         }
         return (short) val;
@@ -19,13 +21,13 @@ public final class PhoneNumber {
 
     @Override
     public boolean equals(Object o) {
-        if(o == this) {
+        if (o == this) {
             return true;
         }
-        if(!(o instanceof PhoneNumber)) {
+        if (!(o instanceof PhoneNumber)) {
             return false;
         }
-        PhoneNumber pn = (PhoneNumber)o;
+        PhoneNumber pn = (PhoneNumber) o;
         return pn.lineNum == lineNum && pn.prefix == prefix && pn.areaCode == areaCode;
     }
 
@@ -41,4 +43,28 @@ public final class PhoneNumber {
     public String toString() {
         return String.format("%03d-%03d-%04d", areaCode, prefix, lineNum);
     }
+
+//    @Override
+//    public int compareTo(PhoneNumber pn) {
+//        int result = Short.compare(areaCode, pn.areaCode);
+//        if (result == 0) {
+//            result = Short.compare(prefix, pn.prefix);
+//            if (result == 0) {
+//                result = Short.compare(lineNum, pn.lineNum);
+//            }
+//        }
+//        return result;
+//    }
+
+
+    // 비교자 생성 메서드를 활용한 비교자
+    @Override
+    public int compareTo(PhoneNumber pn) {
+        return COMPARATOR.compare(this, pn);
+    }
+
+    private static final Comparator<PhoneNumber> COMPARATOR =
+            Comparator.comparingInt((PhoneNumber pn) -> pn.areaCode)
+            .thenComparingInt(pn -> pn.prefix)
+            .thenComparingInt(pn -> pn.lineNum);
 }
