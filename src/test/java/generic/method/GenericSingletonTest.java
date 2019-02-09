@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import java.util.function.UnaryOperator;
 
-import static org.junit.Assert.*;
-
 public class GenericSingletonTest {
 
     @Test
