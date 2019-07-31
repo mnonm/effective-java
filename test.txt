@@ -1,0 +1,7 @@
+staple
+petals
+apple
+aabbcc
+bbaacc
+baabcc
+test
